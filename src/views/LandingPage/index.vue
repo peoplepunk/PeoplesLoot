@@ -1,155 +1,105 @@
 <template>
     <div class="landingpage">
-
-
-
-
+        <div class="wallet">
+            <div v-if='address' class='addr'>
+                Wallet {{getAddr(address)}}
+            </div>
+            <div v-else>
+                点击连接Metamask
+            </div>
+        </div>
         <div class="container">
 
             <div class="logo-block">
-
-
                 <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="">
-
-                <div>People's Loot</div>
+                <div class='name'>People's Loot</div>
             </div>
-
             <div class="subtitle">
                 People's Loot is randomized adventurer gear generated and stored on chain. Stats, images, and other functionality are intentionally omitted for others to interpret.
 
                 Feel free to use Loot in any way you want.
             </div>
             <div class="btn" @click="buidl">Mint People's Loot</div>
-
-
-
-
         </div>
     </div>
 </template>
 <script>
-export default {
-    data(){
-        return {}
-    },
-    methods:{
-        buidl(){
-            this.$message({
-          message: 'Buidling',
-          type: 'warning'
-        });
-        }
-    }
-}</script>
-<style lang='less'>
+    import Web3 from 'web3'
+    import ldmWeb3 from "./web3";
+    export default {
+        data() {
+            return {
+                address: "",
+                chainId: 0,
+            }
+        },
+        created() {
+            let self = this
+            //            ldmWeb3.Init(addr => {
+            //                //得到相应的钱包地址
+            //                self.address = addr
+            //                console.log("ethereum", ethereum)
+            //
+            //                //                let Web3 = Web3.currentProvider();
+            //                //                console.log(Web3)
+            //            })
+        },
+        async mounted() {
+            let self = this
+            var web3Provider;
+            if (window.ethereum) {
+                web3Provider = window.ethereum;
+                try {
+                    // 请求用户授权
+                    await window.ethereum.enable();
+                } catch (error) {
+                    //用户不授权时，这里处理异常情况，同时可以设置重试等机制
+                    console.log(error)
+                }
+            } else if (window.web3) { // 老版 MetaMask Legacy dapp browsers...
+                web3Provider = window.web3.currentProvider;
+            } else {
+                self.$message({
+                    message: '请在metamask环境使用',
+                    type: 'error'
+                });
+            }
+            this.web3 = new Web3(web3Provider);
+            let address = await self.web3.eth.getCoinbase()
+            let chainId = await self.web3.eth.getChainId()
+            console.log("获取账户地址Coinbase", address, chainId)
+            self.chainAlert(chainId)
 
-
-    html {
-        background-color: black;
-        background-color: #111;
-        width: 18.75rem;
-        margin:0.8rem;
-        box-sizing: border-box;
-    }
-
-
-    .landingpage {
-        width:100%;
-        height: 100vh;
-        max-width:40rem;
-        margin:0px auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-
-        .btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 2rem;
-            color: #ffffff;
-            display: inline-block;
-            font-size: 1rem;
-            letter-spacing: 2px;
-            margin: 0.5rem;
-            overflow: hidden;
-            position: relative;
-            padding: 12px 36px;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .subtitle {
-            width: 800px;
-            text-align: center;
-            color: white;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .logo-block {
-            justify-content: center;
-            font-size: 28px;
-            line-height: 6rem;
-            font-family: "Trebuchet MS", sans-serif;
-            color: #fff;
-            animation: shaking .3s steps(6, end) infinite;
-            white-space: nowrap;
-            mix-blend-mode: screen;
-            margin-bottom: 20px;
-
-            .svg-tiktok {
-                fill: #fff;
-                width: 5rem;
-/*                height: 6rem;*/
-                transform: translateY(2rem);
+            self.address = address
+            self.chainId = chainId
+            window.ethereum.on("networkChanged", chainId => {
+                self.chainAlert(chainId)
+            })
+        },
+        methods: {
+            buidl() {
+                this.$message({
+                    message: 'Buidling',
+                    type: 'warning'
+                });
+            },
+            getAddr(addr) {
+                let self = this
+                return `${addr.slice(0,5)}...${addr.substr(addr.length-5, 5)}`
+            },
+            chainAlert(id) {
+                if (id != 3) {
+                    self.$message({
+                        message: '请切换到Rposten环境',
+                        type: 'error'
+                    });
+                }
             }
         }
     }
 
-
-
-
-
-    @keyframes shaking {
-        0% {
-            filter: drop-shadow(3px 3px 0px #0ff) drop-shadow(-3px -3px 0px #f00);
-            transform: translate(1px, 1px);
-        }
-
-        20% {
-            filter: drop-shadow(-3px 3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
-            transform: translate(-2px, 1px);
-        }
-
-        40% {
-            filter: drop-shadow(3px -3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
-            transform: translate(1px, -1px);
-        }
-
-        60% {
-            filter: drop-shadow(-3px -3px 0px #0ff) drop-shadow(3px 3px 0px #f00);
-            transform: translate(-1px, -1px);
-        }
-
-        80% {
-            filter: drop-shadow(-2px 3px 0px #0ff) drop-shadow(-3px 2px 0px #f00);
-            transform: translate(2px, 0px);
-        }
-
-        100% {
-            filter: drop-shadow(-3px 1px 0px #0ff) drop-shadow(1px -3px 0px #f00);
-            transform: translate(1px, 1px);
-        }
-    }
-
-    
-
-    @keyframes animate {
-        to {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(1);
-        }
-    }
+</script>
+<style lang='less'>
+    @import './style.less';
 
 </style>
