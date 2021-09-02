@@ -10,10 +10,7 @@ export default{
 }</script>
 <style lang='less'>
 
-html {
-    background-color: black;
-    background-color: #111;
-    margin: 15px;
-    box-sizing: border-box;
-}
+  @import "styles/reset";
+
+
 </style>
