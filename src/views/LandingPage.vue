@@ -46,36 +46,38 @@ export default {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+        
     }
 
     html {
-        font-size: 62.5%;
+        font-size: 20px;
+        background-color: black;
+        background-color: #111;
+        width: 100%;
+/*        font-size: 1.6rem;*/
     }
 
-    body {
-        font-size: 1.6rem;
-        background-color: #111;
-        position: relative;
-    }
 
     .landingpage {
-        width: 100vw;
+/*        width: 100vw;*/
+        width:100%;
         height: 100vh;
+        max-width:40rem;
+        margin:0px auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: black;
         text-align: center;
 
         .btn {
             background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
+            border-radius: 2rem;
             color: #ffffff;
             display: inline-block;
-            font-size: 18px;
+            font-size: 1rem;
             letter-spacing: 2px;
-            margin: 10px;
+            margin: 0.5rem;
             overflow: hidden;
             position: relative;
             padding: 12px 36px;
@@ -87,11 +89,12 @@ export default {
             width: 800px;
             text-align: center;
             color: white;
-            font-size: 20px;
-            margin-bottom: 20px
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
         .logo-block {
+            justify-content: center;
             font-size: 28px;
             line-height: 6rem;
             font-family: "Trebuchet MS", sans-serif;
@@ -103,9 +106,9 @@ export default {
 
             .svg-tiktok {
                 fill: #fff;
-                width: 8rem;
-                height: 8rem;
-                transform: translateY(1.5rem);
+                width: 5rem;
+/*                height: 6rem;*/
+                transform: translateY(2rem);
             }
         }
     }
@@ -147,24 +150,7 @@ export default {
         }
     }
 
-    .btn {}
-
-    a {}
-
-    /*
-
-    span {
-        animation: animate 1s linear infinite;
-        background-color: #ffffff;
-        border-radius: 50%;
-        height: 500px;
-        opacity: 0.2;
-        pointer-events: none;
-        position: absolute;
-        transform: translate(-50%, -50%) scale(0);
-        width: 500px;
-    }
-*/
+    
 
     @keyframes animate {
         to {
