@@ -25,24 +25,17 @@
 </template>
 <script>
     import Web3 from 'web3'
-    import ldmWeb3 from "./web3";
+    import abi from '@/assets/abi/ddloot.json';
     export default {
         data() {
             return {
                 address: "",
                 chainId: 0,
+            loot:null,
             }
         },
         created() {
             let self = this
-            //            ldmWeb3.Init(addr => {
-            //                //得到相应的钱包地址
-            //                self.address = addr
-            //                console.log("ethereum", ethereum)
-            //
-            //                //                let Web3 = Web3.currentProvider();
-            //                //                console.log(Web3)
-            //            })
         },
         async mounted() {
             let self = this
@@ -75,6 +68,8 @@
             window.ethereum.on("networkChanged", chainId => {
                 self.chainAlert(chainId)
             })
+            self.loot = new self.web3.eth.Contract(abi, "0xf1d07f1475a4264AA90408c62bb8b04ab3706362")
+            console.log(self.loot)
         },
         methods: {
             buidl() {
