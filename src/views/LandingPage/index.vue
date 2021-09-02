@@ -9,7 +9,7 @@
             <div class="logo-block">
 
 
-                <img class="icon svg-tiktok" src="../assets/image/dddd.svg" alt="">
+                <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="">
 
                 <div>People's Loot</div>
             </div>
@@ -19,7 +19,7 @@
 
                 Feel free to use Loot in any way you want.
             </div>
-            <div class="btn" @click="buidl"> Mint People's Loot</div>
+            <div class="btn" @click="buidl">Mint People's Loot</div>
 
 
 
@@ -42,24 +42,18 @@ export default {
     }
 }</script>
 <style lang='less'>
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        
-    }
+
 
     html {
-        font-size: 20px;
         background-color: black;
         background-color: #111;
-        width: 100%;
-/*        font-size: 1.6rem;*/
+        width: 18.75rem;
+        margin:0.8rem;
+        box-sizing: border-box;
     }
 
 
     .landingpage {
-/*        width: 100vw;*/
         width:100%;
         height: 100vh;
         max-width:40rem;
@@ -119,7 +113,6 @@ export default {
 
     @keyframes shaking {
         0% {
-            /* Using filter cause text-shadow doesn't support svgs */
             filter: drop-shadow(3px 3px 0px #0ff) drop-shadow(-3px -3px 0px #f00);
             transform: translate(1px, 1px);
         }
