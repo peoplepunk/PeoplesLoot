@@ -16,8 +16,14 @@
             </div>
             <div class="btn-group">
                 <input type="text" v-model='tokenId' placeholder="Please input tokenId">
-            <div class="btn" @click="claim">Claim People's Loot</div>
-                
+                <div class="btn" @click="claim">Claim People's Loot</div>
+
+            </div>
+            <div class="bottom-group">
+<!--               这个地方展示image list-->
+                <div v-for="x in tokenIds">
+                   <img :src="getImage(x)" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -31,7 +37,7 @@
                 address: null,
                 chainId: null,
                 loot: null,
-                tokenId:null,
+                tokenId: null,
                 tokenIds: []
             };
         },
@@ -40,6 +46,12 @@
             let tokenIds = localStorage.getItem('tokenIds') || "[]"
             tokenIds = JSON.parse(tokenIds)
             self.tokenIds = tokenIds
+        },
+        watch:{
+            tokenIds(){
+                let self = this
+                console.log("tokenIds",self.tokenIds)
+            }
         },
         async mounted() {
             let web3Provider;
@@ -66,50 +78,51 @@
             });
         },
         methods: {
-            buidl() {
-                this.$message({
-                    message: "Buidling",
-                    type: "warning",
-                });
+            getImage(tokenId){
+                let self = this
+               let image =  self.loot.methods.tokenURI(tokenId).call().then(res=>{
+                   console.log(res)
+               })
             },
+           
             /**
              * @description claim a loot
              */
             claim() {
                 let self = this
                 let tokenId = self.tokenId
-                if(tokenId){
+                if (tokenId) {
                     self.loot.methods
-                    .claim(tokenId)
-                    .send({
-                        from: self.address
-                    })
-                    .on("receipt", function(receipt) {
-                        self.$message({
-                            message: "Mint Success",
-                            type: "success",
+                        .claim(tokenId)
+                        .send({
+                            from: self.address
+                        })
+                        .on("receipt", function(receipt) {
+                            self.$message({
+                                message: "Mint Success",
+                                type: "success",
+                            });
+                            let tokenIds = localStorage.getItem('tokenIds') || "[]"
+                            tokenIds = JSON.parse(tokenIds)
+                            tokenIds.push(tokenId)
+                            localStorage.setItem('tokenIds', JSON.stringify(tokenIds))
+                            self.tokenIds = tokenIds
+                            console.log(receipt);
+                        })
+                        .on("error", function(error, receipt) {
+                            self.$message({
+                                message: error,
+                                type: "error",
+                            });
                         });
-                        let tokenIds = localStorage.getItem('tokenIds') || "[]"
-                        tokenIds = JSON.parse(tokenIds)
-                        tokenIds.push(tokenId)
-                        localStorage.setItem('tokenIds', tokenIds)
-                        self.tokenIds = tokenIds
-                        console.log(receipt);
-                    })
-                    .on("error", function(error, receipt) {
-                         self.$message({
-                            message: error,
-                            type: "error",
-                        });
-                    });
-                }else{
+                } else {
                     self.$message({
-                            message: "Please Input TokenId",
-                            type: "error",
-                        });
+                        message: "Please Input TokenId",
+                        type: "error",
+                    });
                 }
 
-                
+
             },
             getAddress(address) {
                 return `${address.slice(0, 5)}...${address.substr(address.length - 5, 5)}`;
