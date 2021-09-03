@@ -20,7 +20,7 @@
           placeholder="Please input tokenId"
         />
 -->
-        <div class="btn" @click="claim">Claim pLoot</div>
+        <div class="btn" @click="claim()">Claim pLoot</div>
       </div>
       <div class="link-group">
           <a href="https://twitter.com/peoplespunk">Twitter</a>
@@ -80,12 +80,12 @@ export default {
     await this.checkChain();
     this.loot = new this.web3.eth.Contract(
       abi,
-      "0x7334120f91d35340C70AD9d229D3205e6C569433"
+      "0x514da9fd0f00394f52598c6c131510cc9bea56a7"
     );
     window.ethereum.on("networkChanged", (chainId) => {
       this.checkChain(chainId);
     });
-    this.getImages();
+//    this.getImages();
   },
   methods: {
       setTokenIds(tokenId){
@@ -108,7 +108,6 @@ export default {
             this.images.push(data.image)
           });
       });
-      console.log(this.images);
     },
 
     /**
@@ -167,10 +166,10 @@ export default {
     async disconnect() {},
     async checkChain(id) {
       const chainId = id || (await this.web3.eth.getChainId());
-      console.log("当前chainId", chainId);
+      console.log("chainId", chainId);
       if (chainId !== 4) {
         this.$message({
-          message: "Please switch Rposten",
+          message: "Please switch MainNet",
           type: "error",
         });
       }
