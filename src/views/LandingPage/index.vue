@@ -3,28 +3,37 @@
     <div v-if="address" class="wallet address">
       Wallet {{ getAddress(address) }}
     </div>
-    <a v-else @click="connect" class="wallet address"> 点击连接Metamask </a>
+    <a v-else @click="connect" class="wallet address"> Connect Metamask </a>
     <div class="container">
       <div class="logo-block">
         <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="" />
-        <div class="name">People's Loot</div>
+        <div class="name">pLoot</div>
       </div>
       <div class="subtitle">
-        People's Loot is randomized adventurer gear generated and stored on
-        chain. Stats, images, and other functionality are intentionally omitted
-        for others to interpret. Feel free to use Loot in any way you want.
+        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLoot was given.
       </div>
       <div class="btn-group">
+<!--
         <input
           type="text"
           v-model="tokenId"
           placeholder="Please input tokenId"
         />
-        <div class="btn" @click="claim">Claim People's Loot</div>
+-->
+        <div class="btn" @click="claim">Claim pLoot</div>
       </div>
-      <div class="bottom-group">
-        <!--               这个地方展示image list-->
+      <div class="link-group">
+          <a href="https://twitter.com/peoplespunk">Twitter</a>
+          <a href="https://discord.com/invite/EZUduaFDg9">Discord</a>
+      </div>
+<!--
+      <div class="bottom-group" v-if="images.length">
+                       这个地方展示image list
           <img v-for="i in images" :key="i" :src="i"  class='nft'/>
+      </div>
+-->
+      <div class="footer">
+          $DDDD is the spirit fragment of the Goddess of Punk
       </div>
     </div>
   </div>
@@ -46,16 +55,12 @@ export default {
   },
   created() {
     let self = this;
-    let tokenIds = localStorage.getItem("tokenIds") || "[]";
-    tokenIds = JSON.parse(tokenIds);
-    self.tokenIds = tokenIds;
+//    let tokenIds = localStorage.getItem("tokenIds") || "[]";
+//    tokenIds = JSON.parse(tokenIds);
+//    self.tokenIds = tokenIds;
   },
   watch: {
-    tokenIds() {
-      let self = this;
-        
-      console.log("tokenIds", self.tokenIds);
-    },
+    
   },
   async mounted() {
     let web3Provider;
@@ -83,8 +88,17 @@ export default {
     this.getImages();
   },
   methods: {
+      setTokenIds(tokenId){
+          let self = this
+          let old_info = localStorage.getItem('tokenInfo')||"{}"
+          old_info = JSON.parse(old_info)
+          let address_info = old_info[self.address]||[]
+          address_info.push(tokenId)
+          old_info[self.address] = address_info
+          localStorage.setItem(JSON.stringify(old_info))
+      },
     getImages() {
-      console.log('this.loot',this.loot);
+    
       this.tokenIds.map((tokenId, i) => {
         this.loot.methods
           .tokenURI(tokenId)
@@ -102,10 +116,8 @@ export default {
      */
     claim() {
       let self = this;
-      let tokenId = self.tokenId;
-      if (tokenId) {
         self.loot.methods
-          .claim(tokenId)
+          .claim()
           .send({
             from: self.address,
           })
@@ -114,13 +126,13 @@ export default {
               message: "Mint Success",
               type: "success",
             });
-            let tokenIds = localStorage.getItem("tokenIds") || "[]";
-            tokenIds = JSON.parse(tokenIds);
-            tokenIds.push(tokenId);
-            localStorage.setItem("tokenIds", JSON.stringify(tokenIds));
-            self.tokenIds = tokenIds;
-            
-            self.getImages()
+//            let tokenIds = localStorage.getItem("tokenIds") || "[]";
+//            tokenIds = JSON.parse(tokenIds);
+//            tokenIds.push(tokenId);
+//            localStorage.setItem("tokenIds", JSON.stringify(tokenIds));
+//            self.tokenIds = tokenIds;
+//            setTokenIds()
+//            self.getImages()
             console.log(receipt);
           })
           .on("error", function (error, receipt) {
@@ -129,12 +141,7 @@ export default {
               type: "error",
             });
           });
-      } else {
-        self.$message({
-          message: "Please Input TokenId",
-          type: "error",
-        });
-      }
+      
     },
     getAddress(address) {
       return `${address.slice(0, 5)}...${address.substr(
