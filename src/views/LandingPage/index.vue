@@ -24,9 +24,7 @@
       </div>
       <div class="bottom-group">
         <!--               这个地方展示image list-->
-        <div v-for="i in images" :key="i">
-          <img :src="i" alt="" />
-        </div>
+          <img v-for="i in images" :key="i" :src="i"  class='nft'/>
       </div>
     </div>
   </div>
@@ -55,6 +53,7 @@ export default {
   watch: {
     tokenIds() {
       let self = this;
+        
       console.log("tokenIds", self.tokenIds);
     },
   },
@@ -85,7 +84,7 @@ export default {
   },
   methods: {
     getImages() {
-      console.log(this.loot);
+      console.log('this.loot',this.loot);
       this.tokenIds.map((tokenId, i) => {
         this.loot.methods
           .tokenURI(tokenId)
@@ -120,6 +119,8 @@ export default {
             tokenIds.push(tokenId);
             localStorage.setItem("tokenIds", JSON.stringify(tokenIds));
             self.tokenIds = tokenIds;
+            
+            self.getImages()
             console.log(receipt);
           })
           .on("error", function (error, receipt) {
