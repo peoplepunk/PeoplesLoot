@@ -7,10 +7,10 @@
     <div class="container">
       <div class="logo-block">
         <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="" />
-        <div class="name">pLoot</div>
+        <div class="name">pLOOT</div>
       </div>
       <div class="subtitle">
-        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLoot was given.
+        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLOOT was given.
       </div>
       <div class="btn-group">
 <!--
@@ -20,7 +20,7 @@
           placeholder="Please input tokenId"
         />
 -->
-        <div class="btn" @click="claim()">Claim pLoot</div>
+        <div class="btn" @click="claim()">Claim pLOOT</div>
       </div>
       <div class="link-group">
           <a href="https://twitter.com/peoplespunk">Twitter</a>
@@ -80,7 +80,7 @@ export default {
     await this.checkChain();
     this.loot = new this.web3.eth.Contract(
       abi,
-      "0x514da9fd0f00394f52598c6c131510cc9bea56a7"
+      "0xb68f52fe2583b5a568e7e57dc98c69d93821f6e4"
     );
     window.ethereum.on("networkChanged", (chainId) => {
       this.checkChain(chainId);
