@@ -167,7 +167,7 @@ export default {
     async checkChain(id) {
       const chainId = id || (await this.web3.eth.getChainId());
       console.log("chainId", chainId);
-      if (chainId !== 4) {
+      if (chainId !== 1) {
         this.$message({
           message: "Please switch MainNet",
           type: "error",
