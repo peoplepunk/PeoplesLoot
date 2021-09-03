@@ -80,7 +80,7 @@ export default {
     await this.checkChain();
     this.loot = new this.web3.eth.Contract(
       abi,
-      "0xb68f52fe2583b5a568e7e57dc98c69d93821f6e4"
+      "0x03ea00b0619e19759ee7ba33e8eb8e914fbf52ea"
     );
     window.ethereum.on("networkChanged", (chainId) => {
       this.checkChain(chainId);
