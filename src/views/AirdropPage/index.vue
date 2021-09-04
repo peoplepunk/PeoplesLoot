@@ -8,7 +8,7 @@
                 <div class="item" v-for="item in list" :key="item.id">
                     <img class="img" :src="item.json.image" />
                     <h3>{{item.json.name}}</h3>
-                    <button class="btn">Claim</button>
+                    <button class="btn" @click="claim(item.json.name)">Claim</button>
                 </div>
             </div>
         </div>
@@ -94,6 +94,8 @@
                 return list
             },
             claim(tokenId) {
+                tokenId = tokenId.split('#')[1]
+                console.log(tokenId)
                 let self = this
                 let account = self.address
                 //这里需要一个服务获取proof
