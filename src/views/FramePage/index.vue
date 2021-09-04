@@ -10,7 +10,7 @@
         <div class="name">pLOOT</div>
       </div>
 
-      <router-view :web3="web3"></router-view>
+      <router-view :web3="web3" :address="address"></router-view>
 
       <div class="link-group">
         <a href="https://twitter.com/peoplespunk">Twitter</a>
