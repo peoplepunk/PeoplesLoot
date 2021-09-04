@@ -1,0 +1,179 @@
+.frame {
+  width: 100%;
+  position: relative;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+//  justify-content: center;
+  align-items: center;
+  text-align: center;
+    .bottom-group{
+        background-color:white;
+        border-radius: 20px;
+//        border-top-left-radius: 20px;
+//        border-top-right-radius: 20px;
+//        height:200px;
+        wdith:100%;
+        padding:20px;
+        max-width: 800px;
+        display: flex;
+         flex-wrap: wrap;
+  justify-content: space-between;
+        .nft{
+            width:calc(50% - 10px);
+            margin-right: 20px;
+            margin-bottom:20px;
+            &:nth-child(2n){
+                margin-right: unset;
+            }
+        }
+    }
+    .footer{
+        font-size:12px;
+        color:rgba(255,255,255,.2);
+    }
+    .btn-group{
+        display: flex;
+        width:200px;
+         background-color:#F3AE0E;
+        margin: 0px auto;
+        align-items: center;
+    border-radius: 40px;
+    padding-left: 10px;
+        overflow:hidden;
+
+        margin-bottom: 20px;
+
+        input{
+            height: 33px;
+            line-height: 33px;
+            border: none;
+            outline:none;
+
+            font-size: 14px;
+            text-align: center;
+            background-color: transparent;
+
+        }
+
+
+  .btn {
+    display: inline-block;
+    font-size: 14px;
+    overflow: hidden;
+    position: relative;
+      height:35px;
+      width:100%;
+      line-height: 35px;
+    text-decoration: none;
+    cursor: pointer;
+      background-color:#F3AE0E;
+      padding:0px 20px;
+  }
+
+
+    }
+    .link-group{
+        margin-bottom: 20px;
+        font-size:20px;
+        color:white;
+        a{
+            color:white;
+        }
+        a:first-child{
+            margin-right:20px;
+        }
+    }
+  .wallet {
+    background-color: rgba(255, 255, 255, 0.2);
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    color: white;
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  a.wallet {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    a {
+      cursor: pointer;
+    }
+  }
+
+  .subtitle {
+    max-width: 500px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+      margin:0px auto;
+
+    margin-bottom: 20px;
+  }
+
+  .logo-block {
+      margin-top:120px;
+    justify-content: center;
+    font-family: "Trebuchet MS", sans-serif;
+    color: #fff;
+    animation: shaking .3s steps(6, end) infinite;
+    white-space: nowrap;
+    margin-bottom: 20px;
+
+    .name {
+      line-height: 40px;
+      font-size: 20px;
+
+    }
+
+    .svg-tiktok {
+      fill: #fff;
+      width: 100px;
+    }
+  }
+}
+
+
+@keyframes shaking {
+  0% {
+    filter: drop-shadow(3px 3px 0px #0ff) drop-shadow(-3px -3px 0px #f00);
+    transform: translate(1px, 1px);
+  }
+
+  20% {
+    filter: drop-shadow(-3px 3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
+    transform: translate(-2px, 1px);
+  }
+
+  40% {
+    filter: drop-shadow(3px -3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
+    transform: translate(1px, -1px);
+  }
+
+  60% {
+    filter: drop-shadow(-3px -3px 0px #0ff) drop-shadow(3px 3px 0px #f00);
+    transform: translate(-1px, -1px);
+  }
+
+  80% {
+    filter: drop-shadow(-2px 3px 0px #0ff) drop-shadow(-3px 2px 0px #f00);
+    transform: translate(2px, 0px);
+  }
+
+  100% {
+    filter: drop-shadow(-3px 1px 0px #0ff) drop-shadow(1px -3px 0px #f00);
+    transform: translate(1px, 1px);
+  }
+}
+
+
+@keyframes animate {
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

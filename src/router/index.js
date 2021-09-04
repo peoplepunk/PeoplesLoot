@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Frame from '../views/FramePage'
 
 Vue.use(VueRouter)
 
@@ -7,9 +8,19 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import( '../views/LandingPage/index.vue')
+    component: Frame,
+    children: [
+      {
+        path: '',
+        component: () => import( '../views/LandingPage/index.vue'),
+      },
+      {
+        path: 'airdrop',
+        component: () => import( '../views/AirdropPage/index.vue'),
+      }
+    ]
   },
-    
+
 ]
 
 const router = new VueRouter({

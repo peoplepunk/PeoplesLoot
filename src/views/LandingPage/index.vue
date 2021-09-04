@@ -1,45 +1,21 @@
 <template>
   <div class="landingpage">
-    <div v-if="address" class="wallet address">
-      Wallet {{ getAddress(address) }}
-    </div>
-    <a v-else @click="connect" class="wallet address"> Connect Metamask </a>
     <div class="container">
-      <div class="logo-block">
-        <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="" />
-        <div class="name">pLoot</div>
-      </div>
       <div class="subtitle">
-        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLoot was given.
+        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLOOT was given.
       </div>
       <div class="btn-group">
-<!--
         <input
           type="text"
           v-model="tokenId"
           placeholder="Please input tokenId"
         />
--->
-        <div class="btn" @click="claim()">Claim pLoot</div>
-      </div>
-      <div class="link-group">
-          <a href="https://twitter.com/peoplespunk">Twitter</a>
-          <a href="https://discord.com/invite/EZUduaFDg9">Discord</a>
-      </div>
-<!--
-      <div class="bottom-group" v-if="images.length">
-                       这个地方展示image list
-          <img v-for="i in images" :key="i" :src="i"  class='nft'/>
-      </div>
--->
-      <div class="footer">
-          $DDDD is the spirit fragment of the Goddess of Punk
+        <button class="btn" disabled="disabled" @click="claim()">Claim pLOOT</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Web3 from "web3";
 import abi from "@/assets/abi/ddloot.json";
 
 export default {
@@ -53,52 +29,25 @@ export default {
       images: [],
     };
   },
-  created() {
-    let self = this;
-//    let tokenIds = localStorage.getItem("tokenIds") || "[]";
-//    tokenIds = JSON.parse(tokenIds);
-//    self.tokenIds = tokenIds;
-  },
-  watch: {
-    
-  },
+  props: ['web3'],
+  watch: {},
   async mounted() {
-    let web3Provider;
-    if (window.ethereum) {
-      web3Provider = window.ethereum;
-    } else if (window.web3) {
-      // old version of MetaMask Legacy dapp browsers...
-      web3Provider = window.web3.currentProvider;
-    } else {
-      this.$message({
-        message: "Please use metamask",
-        type: "error",
-      });
-    }
-    this.web3 = new Web3(web3Provider);
-    this.setAddress();
-    await this.checkChain();
     this.loot = new this.web3.eth.Contract(
       abi,
-      "0x514da9fd0f00394f52598c6c131510cc9bea56a7"
+      "0x03Ea00B0619e19759eE7ba33E8EB8E914fbF52Ea"
     );
-    window.ethereum.on("networkChanged", (chainId) => {
-      this.checkChain(chainId);
-    });
-//    this.getImages();
   },
   methods: {
-      setTokenIds(tokenId){
-          let self = this
-          let old_info = localStorage.getItem('tokenInfo')||"{}"
-          old_info = JSON.parse(old_info)
-          let address_info = old_info[self.address]||[]
-          address_info.push(tokenId)
-          old_info[self.address] = address_info
-          localStorage.setItem(JSON.stringify(old_info))
-      },
+    setTokenIds(tokenId){
+      let self = this
+      let old_info = localStorage.getItem('tokenInfo')||"{}"
+      old_info = JSON.parse(old_info)
+      let address_info = old_info[self.address]||[]
+      address_info.push(tokenId)
+      old_info[self.address] = address_info
+      localStorage.setItem(JSON.stringify(old_info))
+    },
     getImages() {
-    
       this.tokenIds.map((tokenId, i) => {
         this.loot.methods
           .tokenURI(tokenId)
@@ -109,7 +58,6 @@ export default {
           });
       });
     },
-
     /**
      * @description claim a loot
      */
@@ -173,10 +121,11 @@ export default {
           type: "error",
         });
       }
+
     },
   },
 };
 </script>
-<style lang='less'>
+<style lang='less' scoped>
 @import "./style.less";
 </style>
