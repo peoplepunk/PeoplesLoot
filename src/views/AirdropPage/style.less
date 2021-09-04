@@ -1,0 +1,54 @@
+.airdrop-page {
+
+  .tips {
+    font-size: 24px;
+    padding: 40px 0;
+  }
+
+  .container {
+    padding: 20px;
+  }
+
+  .nfts {
+    display: grid;
+    padding: 20px;
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid #fff;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+  }
+
+  .item {
+    h3 {
+      font-size: 20px;
+      padding: 5px 0;
+    }
+  }
+
+  .img {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+.btn {
+  border: 0 none;
+  display: inline-block;
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+  height:35px;
+  width:100%;
+  line-height: 35px;
+  text-decoration: none;
+  cursor: pointer;
+  background-color:#F3AE0E;
+  padding:0px 20px;
+}
+@media only screen and (max-width: 800px) {
+  .airdrop-page .nfts {
+    grid-template-columns: 1fr;
+  }
+}
