@@ -1,8 +1,12 @@
-.landingpage {
-  .container {
-    padding-top: 80px;
-  }
-
+.frame {
+  width: 100%;
+  position: relative;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+//  justify-content: center;
+  align-items: center;
+  text-align: center;
     .bottom-group{
         background-color:white;
         border-radius: 20px;
@@ -54,7 +58,6 @@
 
 
   .btn {
-    border: 0 none;
     display: inline-block;
     font-size: 14px;
     overflow: hidden;
@@ -112,6 +115,59 @@
     margin-bottom: 20px;
   }
 
+  .logo-block {
+      margin-top:120px;
+    justify-content: center;
+    font-family: "Trebuchet MS", sans-serif;
+    color: #fff;
+    animation: shaking .3s steps(6, end) infinite;
+    white-space: nowrap;
+    margin-bottom: 20px;
+
+    .name {
+      line-height: 40px;
+      font-size: 20px;
+
+    }
+
+    .svg-tiktok {
+      fill: #fff;
+      width: 100px;
+    }
+  }
+}
+
+
+@keyframes shaking {
+  0% {
+    filter: drop-shadow(3px 3px 0px #0ff) drop-shadow(-3px -3px 0px #f00);
+    transform: translate(1px, 1px);
+  }
+
+  20% {
+    filter: drop-shadow(-3px 3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
+    transform: translate(-2px, 1px);
+  }
+
+  40% {
+    filter: drop-shadow(3px -3px 0px #0ff) drop-shadow(3px -3px 0px #f00);
+    transform: translate(1px, -1px);
+  }
+
+  60% {
+    filter: drop-shadow(-3px -3px 0px #0ff) drop-shadow(3px 3px 0px #f00);
+    transform: translate(-1px, -1px);
+  }
+
+  80% {
+    filter: drop-shadow(-2px 3px 0px #0ff) drop-shadow(-3px 2px 0px #f00);
+    transform: translate(2px, 0px);
+  }
+
+  100% {
+    filter: drop-shadow(-3px 1px 0px #0ff) drop-shadow(1px -3px 0px #f00);
+    transform: translate(1px, 1px);
+  }
 }
 
 
