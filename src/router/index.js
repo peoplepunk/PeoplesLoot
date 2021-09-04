@@ -14,10 +14,10 @@ const routes = [
         path: '',
         component: () => import( '../views/LandingPage/index.vue'),
       },
-      {
-        path: 'airdrop',
-        component: () => import( '../views/AirdropPage/index.vue'),
-      }
+      // {
+      //   path: 'airdrop',
+      //   component: () => import( '../views/AirdropPage/index.vue'),
+      // }
     ]
   },
 

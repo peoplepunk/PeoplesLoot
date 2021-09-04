@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <div class="nav">
-      <router-link to="/">HOME</router-link>
-      <router-link to="/airdrop">AIRDROP</router-link>
-    </div>
+<!--    <div class="nav">-->
+<!--      <router-link to="/">HOME</router-link>-->
+<!--      <router-link to="/airdrop">AIRDROP</router-link>-->
+<!--    </div>-->
     <router-view/>
   </div>
 </template>
