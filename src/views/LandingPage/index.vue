@@ -26,6 +26,7 @@ export default {
       tokenIds: [],
       images: [],
       approved: false,
+      dddd_address:"0x8ca9a0fbd8db501f013f2e9e33a1b9dc129a48e0"
     };
   },
   props: ['web3'],
@@ -69,7 +70,7 @@ export default {
     },
     async checkAllowance() {
       if (!this.web3) return ;
-      const allowance = await this.dddd.methods.allowance( this.address, '0x9Be7dF7511C4EA06397BE48BB39676306eb86955').call()
+      const allowance = await this.dddd.methods.allowance( this.address, this.dddd_address).call()
       const allowanceBN = new this.web3.utils.BN(allowance)
       const required = new this.web3.utils.BN(this.web3.utils.toWei('10000'))
      
@@ -83,7 +84,7 @@ export default {
     approve() {
       let self = this;
         self.dddd.methods
-          .approve('0x9Be7dF7511C4EA06397BE48BB39676306eb86955', self.web3.utils.toWei('999999').toString())
+          .approve(self.dddd_address, self.web3.utils.toWei("10000000").toString())
           .send({
             from: self.address,
           })
@@ -167,7 +168,7 @@ export default {
     async checkChain(id) {
       const chainId = id || (await this.web3.eth.getChainId());
       console.log("chainId", chainId);
-      if (chainId !== 4) {
+      if (chainId !== 1) {
         this.$message({
           message: "Please switch MainNet",
           type: "error",
