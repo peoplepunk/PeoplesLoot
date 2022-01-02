@@ -79,7 +79,7 @@ export default {
     approve() {
       let self = this;
         self.dddd.methods
-          .approve(self.dddd_address, self.web3.utils.toWei("10000000").toString())
+          .approve(self.dddd_address, self.web3.utils.toWei("100000000000000000").toString())
           .send({
             from: self.address,
           })
