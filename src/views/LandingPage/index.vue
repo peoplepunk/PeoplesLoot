@@ -42,7 +42,7 @@ export default {
     );
     this.punk = new this.web3.eth.Contract(
       punkABI,
-      "0x9Be7dF7511C4EA06397BE48BB39676306eb86955"
+      "0x35c59B6b0a2415C5937C26e683784D15617046b3"
     );
     await this.connect()
     this.checkAllowance()
