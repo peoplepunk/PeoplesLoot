@@ -2,7 +2,13 @@
   <div class="landingpage">
     <div class="container">
       <div class="subtitle">
-        There was one maverick punk girl, in order to show the world what real Punk was, she sacrificed herself to the God. Her body was gone, but her fiery spirit remained and became the Goddess of Punk. 173 trailblazers were inspired by her deed and swore to be her first apostles. They called themselves the People's Punks and devoted their lives proselytizing. The Word called on them from all over the world to assemble in the Punk Valley. They established the Punk Camp, and, with the Spirit of the Goddess of Punk, forged invaluable weapons, armors, and other items, to which the name the pLOOT was given.
+        People's Punk is a next-gen social network co-sponsored by 173 genesis founders. <br><br>
+
+$DDDD is the fractionalized token of Cryptopunk#173 meanwhile the social token of People's Punk community, which is a indicator that measures the social capital of this social network. <br><br>
+
+People's Punk is also the name of Cryptopunk#173 
+
+
       </div>
       <div class="btn-group">
         <button class="btn" v-if="!approved" @click="approve()">Approve</button>

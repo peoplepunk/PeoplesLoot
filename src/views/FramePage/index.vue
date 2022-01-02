@@ -6,8 +6,10 @@
     <a v-else @click="connect" class="wallet address"> Connect Metamask </a>
     <div class="container">
       <div class="logo-block">
-        <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="" />
-        <div class="name">pLOOT</div>
+        <!-- <img class="icon svg-tiktok" src="../../assets/image/dddd.svg" alt="" /> -->
+        <img class="" src="../../assets/image/ppunk_bg.png" alt="" />
+
+        <!-- <div class="name">pLOOT</div> -->
       </div>
 
       <router-view :web3="web3" :address="address"></router-view>
