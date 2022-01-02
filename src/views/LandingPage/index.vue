@@ -27,28 +27,26 @@ export default {
     return {
       address: null,
       chainId: null,
-      loot: null,
       tokenId: null,
       tokenIds: [],
       images: [],
       approved: false,
-      dddd_address:"0x8ca9a0fbd8db501f013f2e9e33a1b9dc129a48e0"
+      dddd_address:"0x8ca9a0fbd8db501f013f2e9e33a1b9dc129a48e0",
+      ppunk_address:"0x35c59B6b0a2415C5937C26e683784D15617046b3"
     };
   },
   props: ['web3'],
   watch: {},
   async mounted() {
-    this.loot = new this.web3.eth.Contract(
-      abi,
-      "0x03Ea00B0619e19759eE7ba33E8EB8E914fbF52Ea"
-    );
+    let self = this
+    
     this.dddd = new this.web3.eth.Contract(
       ddddABI,
-      "0x72Ba53EC08d9A16882935F222AB1DC7f29365203"
+      self.dddd_address
     );
     this.punk = new this.web3.eth.Contract(
-      punkABI,
-      "0x35c59B6b0a2415C5937C26e683784D15617046b3"
+      abi,
+      self.ppunk_address
     );
     await this.connect()
     this.checkAllowance()
@@ -63,20 +61,11 @@ export default {
       old_info[self.address] = address_info
       localStorage.setItem(JSON.stringify(old_info))
     },
-    getImages() {
-      this.tokenIds.map((tokenId, i) => {
-        this.loot.methods
-          .tokenURI(tokenId)
-          .call()
-          .then((res) => {
-            let data=JSON.parse(window.atob((res.slice(29))))
-            this.images.push(data.image)
-          });
-      });
-    },
+    
     async checkAllowance() {
+      let self = this
       if (!this.web3) return ;
-      const allowance = await this.dddd.methods.allowance( this.address, this.dddd_address).call()
+      const allowance = await this.dddd.methods.allowance( this.address, self.ppunk_address).call()
       const allowanceBN = new this.web3.utils.BN(allowance)
       const required = new this.web3.utils.BN(this.web3.utils.toWei('10000'))
      
@@ -99,13 +88,7 @@ export default {
               message: "Approve Success",
               type: "success",
             });
-//            let tokenIds = localStorage.getItem("tokenIds") || "[]";
-//            tokenIds = JSON.parse(tokenIds);
-//            tokenIds.push(tokenId);
-//            localStorage.setItem("tokenIds", JSON.stringify(tokenIds));
-//            self.tokenIds = tokenIds;
-//            setTokenIds()
-//            self.getImages()
+
             this.checkAllowance()
             console.log(receipt);
           })
@@ -131,13 +114,6 @@ export default {
               message: "Mint Success",
               type: "success",
             });
-//            let tokenIds = localStorage.getItem("tokenIds") || "[]";
-//            tokenIds = JSON.parse(tokenIds);
-//            tokenIds.push(tokenId);
-//            localStorage.setItem("tokenIds", JSON.stringify(tokenIds));
-//            self.tokenIds = tokenIds;
-//            setTokenIds()
-//            self.getImages()
             console.log(receipt);
           })
           .on("error", function (error, receipt) {
